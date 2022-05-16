@@ -1,0 +1,22 @@
+<div class="row">
+    <amplify-authenticator>
+        <ng-template
+          amplifySlot="authenticated"
+          let-user="user"
+          let-signOut="signOut"
+        >
+          <h1>Welcome {{ user.username }}!</h1>
+          <button (click)="signOut()">Sign Out</button>
+          <p></p>
+          <img src="../../assets/images/HarveySnowSmall.jpg" class="rounded " alt="">
+          <p></p>
+          <img src="../../assets/images/CatFace.PNG" class="rounded float-right" alt="">
+          <p></p>
+          <img src="../../assets/images/Ducks.PNG" class="rounded float-right" alt="">
+        </ng-template>
+      </amplify-authenticator>
+</div>
+
+
+
+

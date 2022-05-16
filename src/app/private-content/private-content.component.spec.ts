@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CognitoComponent } from './cognito.component';
+import { PrivateContentComponent } from './private-content.component';
 
-describe('CognitoComponent', () => {
-  let component: CognitoComponent;
-  let fixture: ComponentFixture<CognitoComponent>;
+describe('PrivateContentComponent', () => {
+  let component: PrivateContentComponent;
+  let fixture: ComponentFixture<PrivateContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CognitoComponent ]
+      declarations: [ PrivateContentComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CognitoComponent);
+    fixture = TestBed.createComponent(PrivateContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
