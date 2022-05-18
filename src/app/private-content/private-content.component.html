@@ -1,20 +1,56 @@
-<div class="row">
-    <amplify-authenticator>
-        <ng-template
-          amplifySlot="authenticated"
-          let-user="user"
-          let-signOut="signOut"
-        >
-          <h1>Welcome {{ user.username }}!</h1>
-          <button (click)="signOut()">Sign Out</button>
-          <p></p>
-          <img src="../../assets/images/HarveySnowSmall.jpg" class="rounded " alt="">
-          <p></p>
-          <img src="../../assets/images/CatFace.PNG" class="rounded float-right" alt="">
-          <p></p>
-          <img src="../../assets/images/Ducks.PNG" class="rounded float-right" alt="">
-        </ng-template>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Amazon Cognito</h5>
+                <div class="card-body">
+                <h5 class="card-title">Simple and Secure User Sign-Up, Sign-In, and Access Control</h5>
+                <p class="card-text">Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps 
+                  quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, 
+                  such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0, OAuth and OpenID Connect..
+                </p>
+                <p>The text above is an excerpt of the official <a href="https://aws.amazon.com/cognito/" target="blank">AWS Cognito documentation</a></p>
+                <p>In my case, I'm using AWS Cognito for user authentication to display highly sensitive material</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+      <amplify-authenticator>
+          <ng-template
+            amplifySlot="authenticated"
+            let-user="user"
+            let-signOut="signOut"
+          >
+            <p></p>
+            <button (click)="signOut()">Sign Out</button>
+            <p></p>
+            <h2>Welcome {{ user.username }}! Enjoy this highly sensitive material!</h2>
+            <div class="row mt-2">
+              <div class="col">
+                <img src="../../assets/images/HarveySnowSmall.jpg" class="rounded private_pic img-thumbnail" alt="">
+              </div>
+              <div class="col">
+                <img src="../../assets/images/CatFace.PNG" class="rounded private_pic img-thumbnail" alt="">
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-12">
+                  <div class="card">
+                      <h5 class="card-header">How's the infrastructure of this website?</h5>
+                      <div class="card-body">
+                      <h5 class="card-title">Several Software As A Service (SaaS) working together</h5>
+                      <p class="card-text">Upcoming description of how all the AWS work together...
+                      </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <p>
+
+          </ng-template>
       </amplify-authenticator>
+    </div>
 </div>
 
 

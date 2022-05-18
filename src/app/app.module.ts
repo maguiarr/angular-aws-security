@@ -11,6 +11,7 @@ import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons';
 import { faSignsPost } from '@fortawesome/free-solid-svg-icons';
 import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 import { PrivateContentComponent } from './private-content/private-content.component';
+import { SsoComponent } from './sso/sso.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { PrivateContentComponent } from './private-content/private-content.compo
     HeaderComponent,
     AboutComponent,
     HomeComponent,
-    PrivateContentComponent
+    PrivateContentComponent,
+    SsoComponent
   ],
   imports: [
     BrowserModule,
