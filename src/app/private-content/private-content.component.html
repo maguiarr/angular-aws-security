@@ -26,12 +26,15 @@
             <button (click)="signOut()">Sign Out</button>
             <p></p>
             <h2>Welcome {{ user.username }}! Enjoy this highly sensitive material!</h2>
-            <div class="row mt-2">
-              <div class="col">
-                <img src="../../assets/images/HarveySnowSmall.jpg" class="rounded private_pic img-thumbnail" alt="">
+            <div class="row mt-4">
+
+              <div class="col-sm-6 col-md-6">
+                <p>This is my doggy Harvey Specter from the show "Suits"!</p>
+                <img src="../../assets/images/HarveySnowSmall.jpg" class="rounded  private_pic img-fluid" alt="">
               </div>
-              <div class="col">
-                <img src="../../assets/images/CatFace.PNG" class="rounded private_pic img-thumbnail" alt="">
+              <div class="col-sm-6 col-md-6">
+                <p>This is...., well, just a pretty cat! </p>
+                <img src="../../assets/images/CatFace.PNG" class="rounded  private_pic img-fluid" alt="">
               </div>
             </div>
             <div class="row mt-4">
@@ -39,14 +42,78 @@
                   <div class="card">
                       <h5 class="card-header">How's the infrastructure of this website?</h5>
                       <div class="card-body">
-                      <h5 class="card-title">Several Software As A Service (SaaS) working together</h5>
-                      <p class="card-text">Upcoming description of how all the AWS work together...
-                      </p>
+                        <h5 class="card-title">Several Software As A Service (SaaS) working together</h5>
+                        <p class="card-text">When developing this website, I wanted to take advantage of the High Availability(HA) 
+                          of several SaaS AWS offers, so I did't really have to bother provisioning and maintaining them. In other words, 
+                          build an webiste as Serverles as I could.
+                        </p>
+                        <p><b>AWS Security Token Service (STS)</b>. Even though I'm using Cognito for the sign-up, sign-in, it actually doesn't give you 
+                              any permission to access AWS resources. For this, behind the scenes STS is called and the Jason Web Token (JWT) is swapped
+                              with AWS permissions (IAM Roles), giving temporary access to the AWS resources. 
+                        </p>
+
+                        <p>The actual code was developed in <b>Angular</b>, which just generates a bunch of javascripts (along with the html and css) 
+                              when you do the build. That means it's just a static website and was deployed in the AWS S3 bucket.
+                        </p>
+
+                        <p><b>CloudFront</b> is a fast content delivery network (CDN) services that securely delivers content to the corners of the world. The
+                              Orig Access Identity (OAI), is a CloudFront feature that restricts the access of the S3 bucket only to CloudFront. That means
+                              there's no other way to access the website unless it's through CloudFront. This adds another layer of security to your website.
+                        </p>
+
+                        <p><b>AWS Web Application Firewall (WAF)</b> helps protect your web applications or APIs against common web exploits and bots. It works on the 
+                              layer 7 of the Open Systems Interconnection Model (OSI). That means you can create security rules that control bot traffic and block
+                              common attack patterns, such as SQL injection or cross-site scripting.
+                        </p>
+
+                        <p><b>Shield</b> is a managed Distributed Denial of Service (DDoS) protection service that safeguards applications running on AWS. This service
+                              works on the layers 3 and 4 of the OSI model.
+                        </p>
+
+                        <p><b>Route53</b>is a highly available and scalable cloud Domain Name System (DNS). You can see it as two things: A registrar and domain host. That
+                              means you can do a whatever.com lookup and buy the domain through Route53. In addition, you can also host the domain in it, perfect! 
+                              It's higly integrated with other AWS services such S3 buckets, CloudFront, Load Balancer, API Gateway and other services.
+                        </p>
+
+                        <p><b>AWS Certificate Manager (ACM)</b> is a full service that lets you provision, manage, and deploy public and private Secure Sockets Layer/Transport
+                              Layer Security (SSL/TLS) certificates for use with AWS services. I'm using this service to secure the communication from CloudFront to the other
+                              services the website uses.
+                        </p>
+
+                        <p><b>Amazon Simple Email Service (SES)</b> is a flexible and scalable email service that enables developers to send mail from within any application. 
+                              I'm using this service to send the confirmation email when you are signing up to the MEMBER page, this page. I also use it extensively with the
+                              other extremelly important service, CloudWatch.
+                        </p>
+
+                        <p><b>CloudWatch</b> is used to monitor several AWS services and to respond to system-wide performance changes. You can create metrics and trigger, say,
+                              SES to send emails whenever the metric is overreached, or if you find personal information in the application logs, etc. I have several alerts
+                              created to let me know whenever there's something out of ordinary happening in my Virtual Private Cloud (VPC).
+                        </p>
+
+                        <p><b>API Gateway</b> will be used to connect to the backend services running in a private VPC. This will be done by using RESTfull calls. API Gateway
+                              can handle hundreds of thousands of concurrent API calls and is a great way to connect your presentation to the business logic tier.
+                        </p>
                       </div>
                   </div>
               </div>
+            </div>
+          <div class="row mt-4">
+              <div class="col-md-12 col-sm-12">
+                <img src="../../assets/images/Arch Full.png" class="rounded img-fluid" alt="">
+              </div>
           </div>
-          <p>
+          <div class="row mt-4">
+          Now that the presentation tier is done, let's architect the business and data tier(s), tight them up with security groups, NACL(s), etc..., and develop our
+            internal API(s), which will only be accessible from the S3 bucket! How will the backend services be? The answer is as Serverless as possible. 
+         </div>
+         <div class="row mt-4">
+          In the cloud, it doesn't make sense to leave things running when nobody is using them. At the very least leave one very small piece of code running and quicly 
+          scale it when there's demand. I'm thinking about either AWS Lambda for quick Serverless functions, or AWS Fargate if I go with containers, orchestrated by Amazon Elastic 
+      Kubernetes Service (EKS)...
+         </div>
+         <div class="row mt-4">
+           More to come soon...
+         </div>
 
           </ng-template>
       </amplify-authenticator>

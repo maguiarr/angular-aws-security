@@ -10,6 +10,7 @@ body
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
 @media (min-width:1281px) {
   width: 100px; }
+  font-family: 'Helvetica', serif;
 }
 
 .navbar-nav{
