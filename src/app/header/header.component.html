@@ -13,7 +13,9 @@
         <li class="nav-item"><a class="nav-link" routerLink="/private" routerLinkActive="active-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"> Member</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/sso" routerLinkActive="active-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"> SSO</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/about" routerLinkActive="active-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show"> About Me</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://www.cgi.com/en" target="_blank"> CGI</a></li>  
+        <li class="nav-item"><a class="nav-link" href="https://www.cgi.com/en" target="_blank"> CGI</a></li> 
+        <li *ngIf="!isLogged" class="nav-item"><a class="nav-link" (click)="onLoginClick()"> Login </a></li> 
+        <li *ngIf="isLogged"class="nav-item"><a class="nav-link" (click)="onLogoutClick()"> Logout</a></li> 
       </ul>
    </div> <!-- navbar-collapse.// -->
   </div> <!-- container-fluid.// -->

@@ -9,9 +9,9 @@ import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons';
 import { faSignsPost } from '@fortawesome/free-solid-svg-icons';
-import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 import { PrivateContentComponent } from './private-content/private-content.component';
 import { SsoComponent } from './sso/sso.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
@@ -21,13 +21,13 @@ import { SsoComponent } from './sso/sso.component';
     AboutComponent,
     HomeComponent,
     PrivateContentComponent,
-    SsoComponent
+    SsoComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule,
-    AmplifyAuthenticatorModule
+    FontAwesomeModule
     
   ],
   providers: [],

@@ -15,17 +15,8 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2">
-      <amplify-authenticator>
-          <ng-template
-            amplifySlot="authenticated"
-            let-user="user"
-            let-signOut="signOut"
-          >
-            <p></p>
-            <button (click)="signOut()">Sign Out</button>
-            <p></p>
-            <h2>Welcome {{ user.username }}! Enjoy this highly sensitive material!</h2>
+    <div *ngIf="isLogged" class="row mt-2">
+            <h2>Welcome {{ user.userName }}! Enjoy this highly sensitive material!</h2>
             <div class="row mt-4">
 
               <div class="col-sm-6 col-md-6">
@@ -115,8 +106,8 @@
            More to come soon...
          </div>
 
-          </ng-template>
-      </amplify-authenticator>
+          <!-- </ng-template> -->
+      <!-- </amplify-authenticator> -->
     </div>
 </div>
 
