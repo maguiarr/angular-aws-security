@@ -3,6 +3,9 @@ import { Amplify } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 import { Auth } from 'aws-amplify';
 import { User } from '../models/user';
+import { from, Observable } from  'rxjs';
+import { DataService } from '../services/data.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +14,12 @@ export class CognitoService {
 
   user = {} as User;
   authenticated: boolean = false;
+  message: Observable<string>;
 
-  constructor() { 
+  constructor(private data: DataService) { 
     Amplify.configure({
       Auth: environment.cognito
     })
-   // this.setUserSession();
   }
 
   public getCognitoUser() :Promise<any> {
@@ -31,10 +34,8 @@ export class CognitoService {
     try {
       const cognitoUser = await this.getCognitoUser();
       if (cognitoUser) {
-        console.log('coguser: ', cognitoUser);
         this.user.userName = cognitoUser.username;
         this.user.email = "maguiarr@yahoo.ca";
-        //this.isLogged = true;
       }   
 
       const cognitoSession = await this.getCognitoToken();
@@ -45,6 +46,7 @@ export class CognitoService {
       sessionStorage.setItem('user', JSON.stringify(this.user));
       localStorage.clear();
 
+      this.data.changeMessage(true);
     } catch (error){
       console.log('error: ', error);
     }
@@ -73,13 +75,17 @@ export class CognitoService {
   public async signOut() {
     try {
       await Auth.signOut();
-      // sessionStorage.clear();
       sessionStorage.removeItem('isLogged');
       sessionStorage.removeItem('user');
     } catch (error) {
       console.log('error signing out: ', error);
     }
 
+  }
+
+
+  public getCognitoUserObs() :Observable<boolean>{
+    return  from(Auth.currentUserInfo());
   }
 
 }

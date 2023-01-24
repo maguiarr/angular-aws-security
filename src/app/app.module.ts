@@ -12,6 +12,7 @@ import { faSignsPost } from '@fortawesome/free-solid-svg-icons';
 import { PrivateContentComponent } from './private-content/private-content.component';
 import { SsoComponent } from './sso/sso.component';
 import { NavComponent } from './nav/nav.component';
+import { DataService } from './services/data.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { NavComponent } from './nav/nav.component';
     FontAwesomeModule
     
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

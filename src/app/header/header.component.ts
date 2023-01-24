@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CognitoService } from '../services/cognito.service';
-import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,27 +11,33 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged: boolean = false;
-  user = {} as User;
+  isLogged: Observable<boolean>;
 
-  constructor(private router:Router, private cognitoService: CognitoService) { }
+  constructor(private router:Router, private cognitoService: CognitoService, private data: DataService) { }
 
   ngOnInit(): void {
-    this.user = this.cognitoService.getSessionUser();
-    this.isLogged = this.cognitoService.isAuthenticated();
-    console.log('fromHeader isLogged: ',this.cognitoService.isAuthenticated());
-   // console.log('fromHeader user: ',this.cognitoService.getSessionUser());
+    this.cognitoService.setUserSession();
+    if(this.cognitoService.isAuthenticated()){
+      this.data.changeMessage(true);
+    }
+    this.isLogged = this.data.currentMessage;
+    this.reloadComponent();
+
   }
 
   onLoginClick() {
-    const URL ="https://auth.cloudbean.ca/login?client_id=11bd7njio5sovpeih3pekqadsb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http://localhost:4200";
+    const URL ="https://auth.cloudbean.ca/login?client_id=11bd7njio5sovpeih3pekqadsb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http://localhost:4200/private";
     window.location.assign(URL);
   }
 
   onLogoutClick() {
-    this.isLogged = false;
     this.router.navigate(['/']);
     this.cognitoService.signOut();
+    this.data.changeMessage(false);
+  }
+
+  reloadComponent() {
+     this.router.navigate([this.router.url]);
   }
 
 }

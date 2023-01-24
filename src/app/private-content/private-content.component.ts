@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from 'aws-amplify';
+import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { CognitoService } from '../services/cognito.service';
-//import { BehaviorSubject } from 'rxjs';
+import { DataService } from '../services/data.service';
+
 
 @Component({
   selector: 'app-private-content',
@@ -11,19 +12,22 @@ import { CognitoService } from '../services/cognito.service';
 })
 export class PrivateContentComponent implements OnInit {
 
-  isLogged:boolean = false;
+  isLogged: Observable<boolean>;
 
   user = {} as User;
 
-  constructor(private cognitoService: CognitoService) { 
+  constructor(private cognitoService: CognitoService, private data: DataService) { 
 
   }
 
   ngOnInit(): void {
-    this.isLogged = this.cognitoService.isAuthenticated();
+
+    if(this.cognitoService.isAuthenticated()){
+      this.data.changeMessage(true);
+    }
+    this.isLogged = this.data.currentMessage;
     this.user = this.cognitoService.getSessionUser();
-    console.log('privateUser: ', this.user);
-   
+    // console.log('privateUser: ', this.user);
   }
 
 }

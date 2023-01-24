@@ -85,8 +85,8 @@ Amplify.configure({
       oauth: {
           domain: 'auth.cloudbean.ca',
           scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-          redirectSignIn: 'http://localhost:4200',
-          redirectSignOut: 'http://localhost:4200',
+          redirectSignIn: 'http://localhost:4200/private',
+          redirectSignOut: 'http://localhost:4200/private',
           //redirectSignIn: 'http://localhost:3000/',
           //redirectSignOut: 'http://localhost:3000/',
           responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code

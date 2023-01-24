@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
     cognitoService.setUserSession();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 }
