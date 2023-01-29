@@ -20,24 +20,19 @@ export class HeaderComponent implements OnInit {
     if(this.cognitoService.isAuthenticated()){
       this.data.changeMessage(true);
     }
-    this.isLogged = this.data.currentMessage;
-    this.reloadComponent();
-
+    this.isLogged = this.data.currentState;
   }
 
   onLoginClick() {
-    const URL ="https://auth.cloudbean.ca/login?client_id=11bd7njio5sovpeih3pekqadsb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http://localhost:4200/private";
-    window.location.assign(URL);
+
+    //const URL ="https://auth.cloudbean.ca/login?client_id=11bd7njio5sovpeih3pekqadsb&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone&redirect_uri=http://localhost:4200/private";
+   window.location.assign(this.cognitoService.getCognitoURL());
   }
 
   onLogoutClick() {
     this.router.navigate(['/']);
     this.cognitoService.signOut();
     this.data.changeMessage(false);
-  }
-
-  reloadComponent() {
-     this.router.navigate([this.router.url]);
   }
 
 }

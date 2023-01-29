@@ -5,8 +5,16 @@
 export const environment = {
   production: false,
   cognito: {
-      userPoolId: 'us-east-1_6zMMf2WHM',
-    userPoolWebClientId: '11bd7njio5sovpeih3pekqadsb'
+    userPoolId: 'us-east-1_6zMMf2WHM',
+    userPoolWebClientId: '11bd7njio5sovpeih3pekqadsb',
+    mandatorySignIn: false,
+    oauth: {
+      domain: 'auth.cloudbean.ca',
+      scope: ['phone', 'email','openid', 'aws.cognito.signin.user.admin'],
+      redirectSignIn: 'http://localhost:4200/private',
+      redirectSignOut: 'http://localhost:4200/private',
+      responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
+  }
   }
 };
 

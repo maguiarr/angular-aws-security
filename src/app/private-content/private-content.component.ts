@@ -25,7 +25,7 @@ export class PrivateContentComponent implements OnInit {
     if(this.cognitoService.isAuthenticated()){
       this.data.changeMessage(true);
     }
-    this.isLogged = this.data.currentMessage;
+    this.isLogged = this.data.currentState;
     this.user = this.cognitoService.getSessionUser();
     // console.log('privateUser: ', this.user);
   }

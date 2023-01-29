@@ -4,13 +4,13 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class DataService {
 
-    messageSource = new BehaviorSubject<boolean>(false);
-    currentMessage = this.messageSource.asObservable();
+    isLogged = new BehaviorSubject<boolean>(false);
+    currentState = this.isLogged.asObservable();
 
     constructor(){}
 
-    changeMessage(message: boolean) {
-        this.messageSource.next(message);
+    changeMessage(state: boolean) {
+        this.isLogged.next(state);
     }
 
 
