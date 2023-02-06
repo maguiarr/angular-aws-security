@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,12 @@ import { PrivateContentComponent } from './private-content/private-content.compo
 import { SsoComponent } from './sso/sso.component';
 import { NavComponent } from './nav/nav.component';
 import { DataService } from './services/data.service';
+import { AmplifyConfig } from './config/amplify.config';
+import { CognitoService } from './services/cognito.service';
 
+export function initApp(amplifyConfig: AmplifyConfig) {
+  return () => amplifyConfig.getSSMParameters();
+}
 
 @NgModule({
   declarations: [
@@ -31,9 +36,19 @@ import { DataService } from './services/data.service';
     FontAwesomeModule
     
   ],
-  providers: [DataService],
+  providers: [AmplifyConfig, 
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [AmplifyConfig],
+      multi: true
+    },
+    DataService,
+    CognitoService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components

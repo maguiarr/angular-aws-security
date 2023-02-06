@@ -14,7 +14,7 @@ export const environment = {
       redirectSignIn: 'http://localhost:4200/private',
       redirectSignOut: 'http://localhost:4200/private',
       responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
-  }
+    }
   }
 };
 

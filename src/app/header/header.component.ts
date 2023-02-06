@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
   constructor(private router:Router, private cognitoService: CognitoService, private data: DataService) { }
 
   ngOnInit(): void {
-    this.cognitoService.setUserSession();
     if(this.cognitoService.isAuthenticated()){
       this.data.changeMessage(true);
     }

@@ -4,21 +4,17 @@ import { Auth } from 'aws-amplify';
 import { User } from '../models/user';
 import { from, Observable } from  'rxjs';
 import { DataService } from '../services/data.service';
-import { AmplifyConfig } from '../config/amplify.config';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class CognitoService {
 
   user = {} as User;
   authenticated: boolean = false;
   message: Observable<string>;
 
-  constructor(private data: DataService) { 
-        AmplifyConfig.configureAmplify();
-  }
+  constructor(private data: DataService) { }
 
   public getCognitoUser() :Promise<any> {
     return  Auth.currentUserInfo();
@@ -30,24 +26,32 @@ export class CognitoService {
 
   public async setUserSession(){
     try {
-      const cognitoUser = await this.getCognitoUser();
-      if (cognitoUser) {
-        this.user.userName = cognitoUser.username;
-        this.user.email = cognitoUser.attributes.email;
-      }   
 
-      const cognitoSession = await this.getCognitoToken();
-      if (cognitoSession) {
-        this.user.idToken = cognitoSession.getIdToken().getJwtToken();
-      }   
+      console.log('Auth: ', Auth.configure().userPoolId);
+     if(Auth.configure().userPoolId){
+        const [cognitoUser, cognitoSession] = await Promise.all([
+          this.getCognitoUser(),
+          this.getCognitoToken()
+        ]);
 
-      sessionStorage.setItem('user', JSON.stringify(this.user));
-      localStorage.clear();
+        if (cognitoUser) {
+          this.user.userName = cognitoUser.username;
+          this.user.email = cognitoUser.attributes.email;
+        }   
 
-      this.data.changeMessage(true);
+        if (cognitoSession) {
+          this.user.idToken = cognitoSession.getIdToken().getJwtToken();
+        }   
+
+        sessionStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.clear();
+
+        this.data.changeMessage(true);
+      }
     } catch (error){
       console.log('error: ', error);
     }
+  
   }
 
   isAuthenticated(): boolean {
