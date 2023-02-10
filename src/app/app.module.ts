@@ -17,7 +17,7 @@ import { AmplifyConfig } from './config/amplify.config';
 import { CognitoService } from './services/cognito.service';
 
 export function initApp(amplifyConfig: AmplifyConfig) {
-  return () => amplifyConfig.getSSMParameters();
+  return () => amplifyConfig.configureAmplify();
 }
 
 @NgModule({

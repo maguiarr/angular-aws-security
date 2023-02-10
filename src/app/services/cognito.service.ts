@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import { User } from '../models/user';
 import { from, Observable } from  'rxjs';
 import { DataService } from '../services/data.service';
+import * as AWS from 'aws-sdk';
 
 
 
@@ -41,6 +42,14 @@ export class CognitoService {
 
         if (cognitoSession) {
           this.user.idToken = cognitoSession.getIdToken().getJwtToken();
+
+          AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'us-east-1:2b091c94-09c5-446e-aeae-349d75bc840d',
+            Logins: {
+              'cognito-idp.us-east-1.amazonaws.com/us-east-1_IZG5CoIgZ': this.user.idToken
+            }
+          }, { region: 'us-east-1'});
+    
         }   
 
         sessionStorage.setItem('user', JSON.stringify(this.user));
